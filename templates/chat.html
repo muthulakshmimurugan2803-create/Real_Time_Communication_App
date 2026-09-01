@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Chat - Real-Time Communication App{% endblock %}
+{% block content %}
+<div class="chat-app" id="chat-app" data-user-id="{{ user_id }}" data-username="{{ username }}">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo small">RC</div>
+      <span class="brand-name">Real-Time Communication</span>
+    </div>
+
+    <div class="sidebar-header">
+      <div class="me">
+        <span class="status-dot online"></span>
+        <span class="me-name">{{ username }}</span>
+      </div>
+      <a href="{{ url_for('main.logout') }}" class="btn-logout">Logout</a>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="text" id="user-search" placeholder="Search users..." autocomplete="off">
+    </div>
+
+    <div class="sidebar-title">Users</div>
+    <ul class="user-list" id="user-list">
+      <!-- Filled in by script.js -->
+    </ul>
+  </aside>
+
+  <main class="chat-panel">
+    <div class="chat-header" id="chat-header">
+      <span id="chat-header-name">Select a user to start chatting</span>
+      <span id="chat-header-status" class="chat-header-status"></span>
+    </div>
+
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-placeholder">Pick someone from the left to see your conversation.</div>
+    </div>
+
+    <div class="typing-indicator" id="typing-indicator"></div>
+
+    <form class="chat-input-form" id="chat-input-form">
+      <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off" disabled>
+      <button type="submit" id="send-btn" disabled>Send</button>
+    </form>
+    <div class="chat-error" id="chat-error"></div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
